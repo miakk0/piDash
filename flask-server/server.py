@@ -5,8 +5,8 @@ import windows_interaction
 @app.route('/sessions')
 def update_sound_mixer():
     """Update the list of audio sessions"""
-    
-    new_sessions = windows_interaction.get_audio_sessions()
+    response = windows_interaction.get_audio_sessions()
+    new_sessions = list(response.keys())
     return new_sessions
 
 @app.route('/volume', methods=['GET'])

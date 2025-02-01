@@ -33,21 +33,23 @@ def get_audio_sessions():
             audio_controllers[session.Process.name()] = AudioController(
                 session.Process.name(), interface
             )
-    return list(audio_controllers.keys()) #Returns the names of the sessions as a list of strings
+    return audio_controllers
 
-def set_volume(process_name, value):
+def set_volume(process_name: str, value: str):
     """Set volume for a specific audio session."""
-    audio_sessions = get_audio_sessions()
-    for _, (name, controller) in enumerate(audio_sessions.items()):
-        if name == process_name:
-            controller.set_volume(float(value))
-            return f"Set volume for {controller.process_name} to {value}"
+    if 0 < value < 1:
+        audio_sessions = get_audio_sessions()
+        for _, (name, controller) in enumerate(audio_sessions.items()):
+            if name == process_name:
+                controller.set_volume(float(value))
+                return f"Set volume for {controller.process_name} to {value}"
+        else:
+            controller = None
+            return "Couldn't find controller"
     else:
-        controller = None
-        return "Couldn't find controller"
+        return "Invalid value for volume (must be between 0 and 1)" #To be deleted later since sliders already limits the range
 
-
-def toggle_mute(process_name):
+def toggle_mute(process_name: str):
         """Toggle mute/unmute for a specific audio session."""
         audio_sessions = get_audio_sessions()
         for _, (name, controller) in enumerate(audio_sessions.items()):
