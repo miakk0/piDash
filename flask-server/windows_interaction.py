@@ -79,3 +79,9 @@ def open_app(app_name: str):
     except FileNotFoundError:
         return f"{app_name} could not be found"
     
+def sleep():
+    try:
+        os.system('C:\\Users\\tyann\\Downloads\\PSTools\\psshutdown -x')
+        return "sleep"
+    except:
+        return "Unable to sleep"

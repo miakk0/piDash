@@ -29,5 +29,10 @@ def open_app():
     response = windows_interaction.open_app(app_name)
     return response
 
+@app.route('/sleep')
+def sleep():
+    response = windows_interaction.sleep()
+    return response
+
 if  __name__ == '__main__':
     app.run(debug=True)
