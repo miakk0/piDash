@@ -1,6 +1,7 @@
 from pycaw.pycaw import AudioUtilities
 import keyboard
 import comtypes
+import os
 class AudioController:
     """Creates an object based on the process name of the session (e.g. msedge.exe), allowing the control of the audio (volume & mute state)"""
     def __init__(self, process_name, audio_interface):
@@ -69,3 +70,12 @@ def play_pause():
     except Exception:
         print("Error")
 
+
+def open_app(app_name: str):
+    print(app_name)
+    try:
+        os.system(f'start "" "{app_name}"')
+        return f"{app_name} opened"
+    except FileNotFoundError:
+        return f"{app_name} could not be found"
+    

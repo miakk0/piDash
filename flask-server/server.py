@@ -22,5 +22,12 @@ def toggle_mute():
     response = windows_interaction.toggle_mute(process_name)
     return response
 
+@app.route('/open_app', methods=['GET'])
+def open_app():
+    app_name = request.args.get('app_name')
+    print(app_name)
+    response = windows_interaction.open_app(app_name)
+    return response
+
 if  __name__ == '__main__':
     app.run(debug=True)
